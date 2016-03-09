@@ -19,7 +19,9 @@
     "__BASENAME__" : false
   },
   "rules": {
-    "semi" : [2, "always"],
+    "semi" : [2, "always"], // 必须使用 ';' 号结尾
+    "space-before-function-paren" : 0, // 不检测 function 与 () 之间的空格
+    "jsx-quotes" : 0,
     "space-infix-ops": 0,
     "max-len": [2, 120, 2],
     "flow-vars/define-flow-type": 1,

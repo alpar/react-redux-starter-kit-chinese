@@ -20,4 +20,20 @@
   *:after {
     box-sizing: inherit;
   }
+
+  .btn{
+    padding: 3px 12px;
+    border-radius: 0;
+  }
+  .btn-red{
+    color: white;
+    background-color: red;
+    border-color: #761c19;
+  }
+  .btn-black{
+    color: white;
+    background-color: black;
+    border-color: #761c19;
+  }
+
 }
