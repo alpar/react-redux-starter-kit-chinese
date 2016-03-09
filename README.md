@@ -7,35 +7,21 @@ React Redux Starter Kit
 [![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-> ### Want Semicolons?
+> ### 让eslint 检测 分号?
 > After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs. See, we can coexist peacefully.
 
 This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
 
 The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
 
-Table of Contents
------------------
-1. [Requirements](#requirements)
-1. [Features](#features)
-1. [Getting Started](#getting-started)
-1. [Starting a New Project](#starting-a-new-project)
-1. [Usage](#usage)
-1. [Structure](#structure)
-1. [Webpack](#webpack)
-1. [Server](#server)
-1. [Styles](#styles)
-1. [Testing](#testing)
-1. [Deployment](#deployment)
-1. [Troubleshooting](#troubleshooting)
 
-Requirements
+环境需求
 ------------
 
 * node `^4.2.0`
 * npm `^3.0.0`
 
-Features
+功能特点
 --------
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
@@ -73,7 +59,7 @@ Features
   * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this!
   * Includes separate test-specific `.eslintrc` to support chai assertions
 
-Getting Started
+如何开始
 ---------------
 
 Just clone the repo and install the necessary node modules:
@@ -85,7 +71,7 @@ $ npm install                   # Install Node modules listed in ./package.json 
 $ npm start                     # Compile and launch
 ```
 
-Starting a New Project
+创建一个新项目
 ----------------------
 
 Want to start a new project without having to clean up the (tiny) example code? After cloning the repo and following the steps above, do the following:
@@ -97,7 +83,7 @@ $ npm run make:project          # Make your new project
 $ rm -rf .git && git init       # Start a new git repository
 ```
 
-Usage
+用法
 -----
 
 Before delving into the descriptions of each available npm script, here's a brief summary of the three which will most likely be your bread and butter:
@@ -123,7 +109,7 @@ Great, now that introductions have been made here's everything in full detail:
 
 **NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/_production.js`.
 
-### Configuration
+### 配置
 
 Basic project configuration can be found in `~/config/_base.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
 
@@ -137,45 +123,44 @@ Common configuration options:
 * `compiler_devtool` - what type of source-maps to generate (set to `false`/`null` to disable)
 * `compiler_vendor` - packages to separate into to the vendor bundle
 
-Structure
+目录结构
 ---------
 
-The folder structure provided is only meant to serve as a guide, it is by no means prescriptive. It is something that has worked very well for me and my team, but use only what makes sense to you.
 
 ```
 .
-├── bin                      # Build/Start scripts
+├── bin                      # 构建/启动 脚本
 ├── build                    # All build-related configuration
 │   └── webpack              # Environment-specific configuration files for webpack
-├── config                   # Project configuration settings
+├── config                   # 项目配置
 ├── server                   # Koa application (uses webpack middleware)
-│   └── main.js              # Server application entry point
-├── src                      # Application source code
-│   ├── components           # Generic React Components (generally Dumb components)
-│   ├── containers           # Components that provide context (e.g. Redux Provider)
-│   ├── layouts              # Components that dictate major page structure
+│   └── main.js              # 服务端程序的入口点
+├── src                      # 源码目录
+│   ├── components           # 常击倒 React 组件目录 (generally Dumb components)
+│   ├── containers           # 提供上下文环境的组件目录 (例 如. Redux Provider)
+│   ├── layouts              # 布局类组件目录
 │   ├── redux                # Redux-specific pieces
 │   │   ├── modules          # Collections of reducers/constants/actions
 │   │   └── utils            # Redux-specific helpers
-│   ├── routes               # Application route definitions
-│   ├── static               # Static assets (not imported anywhere in source code)
+│   ├── routes               # 路由定义目录
+│   ├── static               # 静态资源目录 (not imported anywhere in source code)
 │   ├── styles               # Application-wide styles (generally settings)
 │   ├── views                # Components that live at a route
-│   └── main.js              # Application bootstrap and rendering
-└── tests                    # Unit tests
+│   └── main.js              # 应用程序的入口点
+└── tests                    # 单元测试
 ```
 
 ### Components vs. Views vs. Layouts
 
 **TL;DR:** They're all components.
 
-This distinction may not be important for you, but as an explanation: A **Layout** is something that describes an entire page structure, such as a fixed navigation, viewport, sidebar, and footer. Most applications will probably only have one layout, but keeping these components separate makes their intent clear. **Views** are components that live at routes, and are generally rendered within a **Layout**. What this ends up meaning is that, with this structure, nearly everything inside of **Components** ends up being a dumb component.
+这种区别可能不是对你很重要，这是稍做解释: 一个布局 **Layout** 描述了整个页面的结构, 比如 fixed navigation, viewport, sidebar, footer. 大多数应用只有一个布局, 保持这些组件独立看起来会更清析. **Views** 组件位于 `route`, 一般会在 **Layout** 组件中渲染. What this ends up meaning is that, with this structure, nearly everything inside of **Components** ends up being a dumb component.
 
 Webpack
 -------
 
-### Vendor Bundle
-You can redefine which packages to bundle separately by modifying `compiler_vendor` in `~/config/_base.js`. These default to:
+### 第三方 bundle
+通过修改 `~/config/_base.js` 中 `compiler_vendor` 项,你可以定义哪些第三方包独立打包 . 默认以下第三方库将合并为一个`verdor.js`:
 
 ```js
 [
@@ -192,18 +177,18 @@ You can redefine which packages to bundle separately by modifying `compiler_vend
 Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
 
 ```js
-// current file: ~/src/views/some/nested/View.js
+// 当前文件: ~/src/views/some/nested/View.js
 
-// What used to be this:
+// 一般这样导入:
 import SomeComponent from '../../../components/SomeComponent'
 
-// Can now be this:
+// 也可以这样导入:
 import SomeComponent from 'components/SomeComponent' // Hooray!
 ```
 
-### Globals
+### 全局设置
 
-These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/_base.js`. When adding new globals, also add them to `~/.eslintrc`.
+这些全局变量在作何地方都可以访问. 如果你想修改他们的话, 我可以修改`~/config/_base.js`文件中的 `globals`项. 添加一个新的全局变量时需同时修改 `~/.eslintrc`.
 
 * `process.env.NODE_ENV` - the active `NODE_ENV` when the build started
 * `__DEV__` - True when `process.env.NODE_ENV` is `development`
@@ -212,15 +197,15 @@ These are global variables available to you anywhere in your source code. If you
 * `__DEBUG__` - True when `process.env.NODE_ENV` is `development` and cli arg `--no_debug` is not set (`npm run dev:no-debug`)
 * `__BASENAME__` - [npm history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)
 
-Server
+服务端
 ------
 
-This starter kit comes packaged with an Koa server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom Koa app in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) will hopefully make it easier for users to extend the starter kit to include functionality such as back-end API's, isomorphic/universal rendering, and more -- all without bloating the base boilerplate. Because of this, it should be noted that the provided server is **not** production-ready. If you're deploying to production, take a look at [the deployment section](#deployment).
+这个工具包封装了`Koa`做为服务器. 需要注意的是这个服务器的目的是通过 `webpack-dev-middleware` 和 `webpack-hot-middleware` 进行热替换. 如果你想用自己的 koa server 替换内建的 koa server,提供 `api` 服务或想实现`isomorphic`同构/universal rendering 等等,请看 [webpack-dev-server](https://github.com/webpack/webpack-dev-server). 内建的 koa server 请不要用于生产环境. 如你你正在部署生产环境, 请看一下[the deployment section](#deployment).
 
-Styles
+风格样式
 ------
 
-Both `.scss` and `.css` file extensions are supported out of the box and are configured to use [CSS Modules](https://github.com/css-modules/css-modules). After being imported, styles will be processed with [PostCSS](https://github.com/postcss/postcss) for minification and autoprefixing, and will be extracted to a `.css` file during production builds.
+`.scss` 和 `.css` 类型的文件全都被支持,请看 [CSS Modules](https://github.com/css-modules/css-modules). 导入以后, 样式会先被 [PostCSS](https://github.com/postcss/postcss)处理,它会自动压缩并添加一些前辍, 在生产环境会自动转换成 `.css` 文件
 
 **NOTE:** If you're importing styles from a base styles directory (useful for generic, app-wide styles), you can make use of the `styles` alias, e.g.:
 
@@ -242,23 +227,22 @@ Here's an example:
 @import 'base';
 ```
 
-Testing
+单元测试
 -------
 
 To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
 
 Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/_base.js`.
 
-Deployment
+部署
 ----------
 
-Out of the box, this starter kit is deployable by serving the `~/dist` folder generated by `npm run compile` (make sure to specify your target `NODE_ENV` as well). This project does not concern itself with the details of server-side rendering or API structure, since that demands an opinionated structure that makes it difficult to extend the starter kit. However, if you do need help with more advanced deployment strategies, here are a few tips:
+Out of the box, this starter kit is deployable by serving the `~/dist` folder generated by `npm run compile` (确认你已指定了目标环境变量 `NODE_ENV`). This project does not concern itself with the details of server-side rendering or API structure, since that demands an opinionated structure that makes it difficult to extend the starter kit. However, if you do need help with more advanced deployment strategies, here are a few tips:
 
-If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. The Koa server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
+如果你想用 `nginx` 提供服务, 确保主目录为 `~/dist/index.html` file and 让 react-router 通过 rest服务获取数据. 通过扩展内建的 koa server 可以提供 `api` 服务或其它一些你想要的功能, 是否要这样做这完全取决于你.
 
-Have more questions? Feel free to submit an issue or join the Gitter chat!
 
-Troubleshooting
+已知问题
 ---------------
 
 ### `npm run dev:nw` produces `cannot read location of undefined.`
@@ -267,7 +251,7 @@ This is most likely because the new window has been blocked by your popup blocke
 
 Reference: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
 
-### Babel Issues
+### Babel 的问题
 
 Running into issues with Babel? Babel 6 can be tricky, please either report an issue or try out the [stable v0.18.1 release](https://github.com/davezuko/react-redux-starter-kit/tree/v0.18.1) with Babel 5. If you do report an issue, please try to include relevant debugging information such as your node, npm, and babel versions.
 
@@ -275,7 +259,7 @@ Running into issues with Babel? Babel 6 can be tricky, please either report an i
 
 In keeping with the goals of this project, no internationalization support is provided out of the box. However, [juanda99](https://github.com/juanda99) has been kind enough to maintain a fork of this repo with internationalization support, [check it out!](https://github.com/juanda99/react-redux-starter-kit)
 
-### High editor CPU usage after compilation
+### 执行编译时编辑器的cpu占用过高
 
 While this is common to any sizable application, it's worth noting for those who may not know: if you happen to notice higher CPU usage in your editor after compiling the application, you may need to tell your editor not to process the dist folder. For example, in Sublime you can add:
 
