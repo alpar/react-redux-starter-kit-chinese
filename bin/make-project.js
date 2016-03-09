@@ -1,10 +1,10 @@
-import path from 'path'
-import cp from 'child_process'
-import replace from 'replace'
+import path from 'path';
+import cp from 'child_process';
+import replace from 'replace';
 
 // TODO: this could probably be better...
 const branchName = cp.execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' })
-  .match(/.+/g)[0]
+  .match(/.+/g)[0];
 
 // Find all occurrences of PROJECT_NAME in ~/src and replace them with
 // the branch name in proper case.
@@ -19,7 +19,7 @@ replace({
   ],
   recursive: true,
   silent: false
-})
+});
 
 // For package.json
 replace({
@@ -30,4 +30,4 @@ replace({
   ],
   recursive: false,
   silent: false
-})
+});
