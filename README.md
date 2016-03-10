@@ -7,8 +7,8 @@ React Redux Starter Kit
 [![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-> ### 让eslint 检测 分号?
-> After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs. See, we can coexist peacefully.
+> ### 启用eslint semi(分号规则)并修复项目中的文件
+> npm install 成功以后, 修改 `.eslintrc` 中 `semi` 规则,由 `never` 更改为 `always`, 然后运行 `npm run lint:fix` -- 就是这么简单! 另外利用同样的方法, 可以根据你的需要自行修改了或扩展 `.eslingrc` 规则, 并运行 `npm run lint:fix`,它会根据你的设置自动修复一些不符合规则的`js`
 
 This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
 
@@ -62,19 +62,17 @@ The primary goal of this project is to remain as **unopinionated** as possible. 
 如何开始
 ---------------
 
-Just clone the repo and install the necessary node modules:
-
 ```shell
 $ git clone https://github.com/davezuko/react-redux-starter-kit.git
 $ cd react-redux-starter-kit
-$ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
-$ npm start                     # Compile and launch
+$ npm install                   # 安装 ./package.json 中列出的 node 模块
+$ npm start                     # 编译并运行
 ```
 
 创建一个新项目
 ----------------------
 
-Want to start a new project without having to clean up the (tiny) example code? After cloning the repo and following the steps above, do the following:
+创建一个空的新项目,请按照下面的步骤操作
 
 ```shell
 $ git checkout -b <your-project-name> new-project
@@ -96,29 +94,29 @@ Before delving into the descriptions of each available npm script, here's a brie
 
 Great, now that introductions have been made here's everything in full detail:
 
-* `npm start` - Spins up Koa server to serve your app at `localhost:3000`. HMR will be enabled in development.
-* `npm run compile` - Compiles the application to disk (`~/dist` by default).
-* `npm run dev` - Same as `npm start`, but enables nodemon to automatically restart the server when server-related code is changed.
-* `npm run dev:nw` - Same as `npm run dev`, but opens the redux devtools in a new window.
-* `npm run dev:no-debug` - Same as `npm run dev` but disables redux devtools.
-* `npm run test` - Runs unit tests with Karma and generates a coverage report.
-* `npm run test:dev` - Runs Karma and watches for changes to re-run tests; does not generate coverage reports.
-* `npm run deploy`- Runs linter, tests, and then, on success, compiles your application to disk.
-* `npm run lint`- Lint all `.js` files.
-* `npm run lint:fix` - Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).
+* `npm start` - 启动 koa Server `http://localhost:3000`, 开发环境下会启用 `热替换`功能
+* `npm run compile` - 运行编译并将编译结果保存到 `dist` 目录
+* `npm run dev` - 与 `npm start` 效果相同, 另外会启动 `nodemon` 监听 `server`的源码文件,如果有改动会自动重启 kof server.
+* `npm run dev:nw` - 与 `npm run dev` 效果相同, 但是 `redux devtools` 会在一个新的窗口中打开.
+* `npm run dev:no-debug` - 与 `npm run dev` 效果相同, 但不启用 `redux devtools`
+* `npm run test` - 运行(Karma)单元测试, 并显示测试报告
+* `npm run test:dev` - 运行(Karma)单元测试,并监视测试代码,如有改动会重新启动单元测试, 此命令不会显示测试报告.
+* `npm run deploy`- 先运行代码质量检查及单元测试, 成功以后, 自动启动编译. 此命令用于部署
+* `npm run lint`- 对所有 `.js` 文件进行代码质量及规则检测.
+* `npm run lint:fix` - 进行代码质量及规则检测 并尝试修复不符合规范的所有 `.js`. [请参考此文](http://eslint.org/docs/user-guide/command-line-interface.html#fix).
 
-**NOTE:** Deploying to a specific environment? Make sure to specify your target `NODE_ENV` so webpack will use the correct configuration. For example: `NODE_ENV=production npm run compile` will compile your application with `~/build/webpack/_production.js`.
+**注意:** 关于特定环境部署 ,首先确认你指定了 `NODE_ENV` 环境变量, 只有指定了环境变量, webpack 才会加载正确的编译配置. 例如: `NODE_ENV=production npm run compile` 调用 `~/build/webpack/_production.js` 的配置然后编译.
 
 ### 配置
 
-Basic project configuration can be found in `~/config/_base.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
+项目基本配置位于 `~/config/_base.js`. 你可以重新定义 `src` 和 `dist` 目录, 调整编译设置, 增加或捆绑第三方依赖库, 等等. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
 
-Common configuration options:
+通用配置:
 
-* `dir_src` - application source code base path
-* `dir_dist` - path to build compiled application to
-* `server_host` - hostname for the Koa server
-* `server_port` - port for the Koa server
+* `dir_src` - 客户端源码目录
+* `dir_dist` - 编译后的输出目录
+* `server_host` - Koa server 的主机名或ip
+* `server_port` - Koa server 的服务端口
 * `compiler_css_modules` - whether or not to enable CSS modules
 * `compiler_devtool` - what type of source-maps to generate (set to `false`/`null` to disable)
 * `compiler_vendor` - packages to separate into to the vendor bundle
@@ -150,17 +148,17 @@ Common configuration options:
 └── tests                    # 单元测试
 ```
 
-### Components vs. Views vs. Layouts
+### Components(组件) vs Views(视图) vs Layouts(布局)
 
-**TL;DR:** They're all components.
+**首先明确一点**: Components, Views, Layouts 全部都是组件,之所以这样划分是根据组件的职能不同, 这样看起来会更明确,当然你也可以添加新的分类,比如: Forms
 
-这种区别可能不是对你很重要，这是稍做解释: 一个布局 **Layout** 描述了整个页面的结构, 比如 fixed navigation, viewport, sidebar, footer. 大多数应用只有一个布局, 保持这些组件独立看起来会更清析. **Views** 组件位于 `route`, 一般会在 **Layout** 组件中渲染. What this ends up meaning is that, with this structure, nearly everything inside of **Components** ends up being a dumb component.
+这种区别可能不是对你很重要，这里稍做解释: 一个布局 **Layout** 描述了整个页面的结构, 比如 fixed navigation, viewport, sidebar, footer. 大多数应用只有一种布局, 保持这些组件独立看起来会更清析. **Views** 组件就是 `route` (路由)要渲染的内容, 一般会在 **Layout** 组件内部渲染.
 
 Webpack
 -------
 
-### 第三方 bundle
-通过修改 `~/config/_base.js` 中 `compiler_vendor` 项,你可以定义哪些第三方包独立打包 . 默认以下第三方库将合并为一个`verdor.js`:
+### 合并打包第三方库
+通过修改 `~/config/_base.js` 中 `compiler_vendor` 项, 你可以定义哪些第三方库将被合并打包 . 默认情况下以下第三方库将合并为一个`verdor.js`:
 
 ```js
 [
