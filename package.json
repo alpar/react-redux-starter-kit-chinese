@@ -60,9 +60,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+    "url": "git+https://github.com/virtoolswebplayer/react-redux-starter-kit-chinese.git"
   },
-  "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
+  "author": "virtoolswebplayer 混在北京",
   "license": "MIT",
   "dependencies": {
     "co-request": "^1.0.0",

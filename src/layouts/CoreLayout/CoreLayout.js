@@ -1,18 +1,22 @@
 import React, { PropTypes } from 'react';
-// import '../../styles/bootstrap/bootstrap.css';
-// import '../../styles/bootstrap/bootstrap-theme.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/core.scss';
+
+import HeaderBar from '../../components/common/HeaderBar';
+import HeaderNavi from '../../components/common/HeaderNavi';
+import Footer from '../../components/common/Footer';
 
 export class CoreLayout extends React.Component {
   static propTypes = {
     children: PropTypes.element
   }
 
-  render () {
+  render() {
     return (
       <div>
+        <HeaderBar/>
+        <HeaderNavi/>
         {this.props.children}
+        <Footer/>
       </div>
     );
   }
