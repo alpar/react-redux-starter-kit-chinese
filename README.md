@@ -84,15 +84,15 @@ $ rm -rf .git && git init       # Start a new git repository
 用法
 -----
 
-Before delving into the descriptions of each available npm script, here's a brief summary of the three which will most likely be your bread and butter:
+在开始详细介绍 **npm script** 之前, 我们先来做个大概介绍吧:
 
-* Doing live development? Use `npm start` to spin up the dev server.
-* Compiling the application to disk? Use `npm run compile`.
-* Deploying to an environment? `npm run deploy` can help with that.
+* 实时开发———— 运行 **npm start** ,启动一个开发服务器.
+* 编译项目———— 运行 **npm run compile**.
+* 环境部署———— 运行 **npm run deploy**
 
-**NOTE:** This package makes use of [debug](https://github.com/visionmedia/debug) to improve your debugging experience. For convenience, all of messages are prefixed with `app:*`. If you'd like to to change what debug statements are displayed, you can override the `DEBUG` environment variable via the CLI (e.g. `DEBUG=app:* npm start`) or tweak the npm scripts (`betterScripts` in `package.json`).
+**注意:** 本项目使用了 [debug](https://github.com/visionmedia/debug) , 它会提升调试体验. For convenience, all of messages are prefixed with `app:*`. If you'd like to to change what debug statements are displayed, you can override the `DEBUG` environment variable via the CLI (e.g. `DEBUG=app:* npm start`) or tweak the npm scripts (`betterScripts` in `package.json`).
 
-Great, now that introductions have been made here's everything in full detail:
+Very Good, 现在我们看一下 **npm script** 的详细功能:
 
 * `npm start` - 启动 koa Server `http://localhost:3000`, 开发环境下会启用 `热替换`功能
 * `npm run compile` - 运行编译并将编译结果保存到 `dist` 目录
